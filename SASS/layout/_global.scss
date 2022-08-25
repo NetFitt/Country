@@ -1,0 +1,11 @@
+//Import 
+@use "../Variables/Variables" as *;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: $TEXT-font;
+    text-decoration: none;
+}

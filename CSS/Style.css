@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: "Nunito Sans";
+  text-decoration: none;
+}
+
+body {
+  background-color: hsl(207deg, 26%, 17%);
+}
+
+header {
+  background-color: hsl(209deg, 23%, 22%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+  box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.034);
+}
+
+.nav {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 1rem 0;
+  color: white;
+}
+.nav__links {
+  margin: 10px;
+}
+
+.container {
+  width: 90%;
+  margin: 4rem auto 0rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+.container__search {
+  display: inline-block;
+  width: 10rem;
+  padding: 20px;
+}/*# sourceMappingURL=Style.css.map */

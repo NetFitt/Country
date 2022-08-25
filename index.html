@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country_rest</title>
+    <!-- style file -->
+    <link rel="stylesheet" href="CSS/style.css">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+        
+
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="nav__links" > 
+                <i class="fa-regular fa-moon"></i>
+                <a href="#">
+                    <h1>Where in the World?</h1>
+                </a>
+            </div>
+            <div class="nav__links">
+                <a href="#">
+                    <h2>Dark Mode</h2>
+                </a>
+                <i class="fa-solid fa-alien"></i>
+            </div>
+        </nav>
+    </header>
+    <main>
+        
+        <div class="container">
+            <div class="search__search">
+                <input class="__countries" type="text" placeholder="Search For Country...">
+            </div>
+            <div class="origin">
+                <div class="selected">
+                    <h2>Filter by Region</h2>
+                </div>
+                <div class="select" >               
+                    <div class="__regions" >
+                        <!-- Africa -->
+                        <div class="__option">
+                            <input value="africa" type="radio" id="africa" name="region" >
+                            <label for="africa">Africa</label>
+                        </div>
+                        <!-- America -->
+                        <div class="__option">
+                            <input value="america" type="radio" id="america" name="regions">
+                            <label for="america">America</label>
+                        </div>                    
+                        <!-- Asia -->
+                        <div class="__option">
+                            <input value="asia" type="radio" id="asia" name="regions">
+                            <label for="asia">Asia</label>
+                        </div>                
+                        <!-- Europe -->
+                        <div class="__option">
+                            <input value="europe" type="radio" id="europe" name="regions">
+                            <label for="europe">Europe</label>
+                        </div>            
+                        <!-- Oceania -->
+                        <div class="__option">
+                            <input value="oceania" type="radio" id="oceania" name="regions">
+                            <label for="ocrania">Oceania</label>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </main>
+
+    <script></script>
+</body>
+</html>

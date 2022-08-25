@@ -1,0 +1,39 @@
+//Importes
+@use  "../SASS/Variables/Variables" as *;
+@use "../SASS/layout/global" as *;
+
+
+body{
+    background-color: $dark-background;
+}
+
+header{
+    background-color: $dark-elements;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.226) ;
+    box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.034);
+}
+.nav{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 1rem 0;
+    color: white;
+    
+    &__links{
+        margin: 10px;
+    }
+}
+.container{
+    
+    width: 90%;
+    margin: 4rem auto 0rem auto;
+    display: flex;
+    justify-content: space-between;
+    &__search{
+        display: inline-block;
+        width:10rem;
+        padding: 20px;
+        
+    }
+}

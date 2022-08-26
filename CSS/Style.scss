@@ -8,32 +8,88 @@ body{
 }
 
 header{
+    height: 5rem;
+    display: flex;
+    align-items: center;
     background-color: $dark-elements;
     border-bottom: 1px solid rgba(0, 0, 0, 0.226) ;
     box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.034);
-}
-.nav{
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 1rem 0;
-    color: white;
-    
-    &__links{
-        margin: 10px;
+    .nav{
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        color: white;
+        &__links{
+            .title{
+                font-size: 1.6rem;
+            }
+            .light{
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
     }
 }
-.container{
-    
+
+// The main thing 
+
+.main{
     width: 90%;
-    margin: 4rem auto 0rem auto;
+    margin: 2.5rem auto 0rem auto;
     display: flex;
     justify-content: space-between;
+
+    // [0] the text input
     &__search{
-        display: inline-block;
-        width:10rem;
-        padding: 20px;
-        
+        .search{
+            display: inline-block;
+            width:24rem;
+            height: 3rem;
+            padding-left: 2.5rem;
+            background-color: $dark-elements;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            &::placeholder{
+                color: white;
+                font-weight: 400;
+            }
+        }
     }
+
+    // [1] on the select
+    &__origin{
+        //[1][0]this is THE button
+        .selected{
+            width: 10rem;
+            height: 3rem;
+            background-color: $dark-elements;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            h4{
+                font-weight: 400;
+            }
+        }
+        .select{
+            border-radius: 5px;
+            background-color: $dark-elements;
+            &__menu{
+                border-radius: 5px;
+                list-style: none;
+                padding: 1rem;
+                &_option{
+                    padding-left: 0.5rem;
+                    font-weight: 400;
+                }
+            
+            }
+            
+        }
+    }
+
 }

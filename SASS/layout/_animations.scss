@@ -1,0 +1,38 @@
+
+@keyframes fade-in {
+    from{
+        visibility: hidden;
+        opacity: 0;
+    }
+    1%{
+        opacity: 0;
+        visibility: visible;
+    }
+    to{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.open{
+    animation: fade-in 300ms ease-in-out forwards;
+}
+//for closing
+@keyframes fade-out {
+    from{
+        visibility: visible;
+        opacity: 1;
+    }
+    1%{
+        opacity: 1;
+        visibility: visible;
+    }
+    to{
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.close{
+    animation: fade-out 300ms  ease-out forwards;
+}

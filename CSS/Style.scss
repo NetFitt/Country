@@ -1,7 +1,7 @@
 //Importes
 @use  "../SASS/Variables/Variables" as *;
 @use "../SASS/layout/global" as *;
-
+@use "../SASS/layout/animations" as *;
 
 body{
     background-color: $dark-background;
@@ -62,8 +62,9 @@ header{
     // [1] on the select
     &__origin{
         //[1][0]this is THE button
+        position: relative;
         .selected{
-            width: 10rem;
+            width: 11rem;
             height: 3rem;
             background-color: $dark-elements;
             display: flex;
@@ -71,25 +72,36 @@ header{
             align-items: center;
             margin-bottom: 0.5rem;
             border-radius: 5px;
+            cursor: pointer;
             h4{
                 font-weight: 400;
             }
         }
         .select{
-            border-radius: 5px;
+            width: 11rem;
+            visibility: hidden;
             background-color: $dark-elements;
+            position: absolute;
+            border-radius: 5px;
+            transition: 0.5S;
+            opacity: 0;
+            //the unordered
             &__menu{
                 border-radius: 5px;
                 list-style: none;
                 padding: 1rem;
+                //lists
                 &_option{
                     padding-left: 0.5rem;
                     font-weight: 400;
+                    margin: 0.2rem 0;
+                    cursor: pointer;
                 }
-            
-            }
-            
+            }            
         }
+    }
+    .grid_container{
+        
     }
 
 }

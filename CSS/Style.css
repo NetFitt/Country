@@ -103,13 +103,16 @@ header .nav__links .light {
   font-weight: 600;
 }
 
-.main {
+main {
   width: 90%;
-  margin: 2.5rem auto 0rem auto;
+  margin: 0 auto;
+}
+main .container {
+  margin: 2.5rem 0 2.5rem 0;
   display: flex;
   justify-content: space-between;
 }
-.main__search .search {
+main .container__search .search {
   display: inline-block;
   width: 24rem;
   height: 3rem;
@@ -119,22 +122,22 @@ header .nav__links .light {
   outline: none;
   border-radius: 5px;
 }
-.main__search .search::-moz-placeholder {
+main .container__search .search::-moz-placeholder {
   color: white;
   font-weight: 400;
 }
-.main__search .search:-ms-input-placeholder {
+main .container__search .search:-ms-input-placeholder {
   color: white;
   font-weight: 400;
 }
-.main__search .search::placeholder {
+main .container__search .search::placeholder {
   color: white;
   font-weight: 400;
 }
-.main__origin {
+main .container__origin {
   position: relative;
 }
-.main__origin .selected {
+main .container__origin .selected {
   width: 11rem;
   height: 3rem;
   background-color: hsl(209deg, 23%, 22%);
@@ -145,10 +148,10 @@ header .nav__links .light {
   border-radius: 5px;
   cursor: pointer;
 }
-.main__origin .selected h4 {
+main .container__origin .selected h4 {
   font-weight: 400;
 }
-.main__origin .select {
+main .container__origin .select {
   width: 11rem;
   visibility: hidden;
   background-color: hsl(209deg, 23%, 22%);
@@ -157,14 +160,40 @@ header .nav__links .light {
   transition: 0.5S;
   opacity: 0;
 }
-.main__origin .select__menu {
+main .container__origin .select__menu {
   border-radius: 5px;
   list-style: none;
   padding: 1rem;
 }
-.main__origin .select__menu_option {
+main .container__origin .select__menu_option {
   padding-left: 0.5rem;
   font-weight: 400;
   margin: 0.2rem 0;
   cursor: pointer;
+}
+main .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 50px;
+}
+main .grid_item {
+  background-color: hsl(209deg, 23%, 22%);
+  border-radius: 5px;
+}
+main .grid_item_title {
+  margin: 10px;
+}
+main .grid_item_text {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+main .grid_item h5, main .grid_item p {
+  display: inline;
+  font-size: 1rem;
+}
+main .grid_item img {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 100%;
+  height: 150px;
 }/*# sourceMappingURL=Style.css.map */

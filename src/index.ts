@@ -1,12 +1,4 @@
 
-class real {
-     
-
-
-
-
-}
-
 let btn = document.querySelector(".selected");
 let select = document.querySelector(".select");
 btn.addEventListener("click",()=>{
@@ -26,7 +18,7 @@ btn.addEventListener("click",()=>{
 // btn is the selcted 
 const region = document.querySelectorAll(".select__menu_option");
 
-const search = document.querySelector(".search")
+const search = (<HTMLInputElement>document.querySelector(".search"))
 
 const API = new XMLHttpRequest()
 API.open("GET" , "https://restcountries.com/v3.1/all")
@@ -39,7 +31,7 @@ API.addEventListener("load",()=>{
 
      
      
-     data.forEach(element => {
+     data.forEach((element:any) => {
           let img = element.flags.png;
           let name = element.name.common;
           let population = element.population;
@@ -91,11 +83,4 @@ API.addEventListener("load",()=>{
 
           })
      });
-     
-     // console.log(Object.keys(data[0]))
-     // console.log(data[0].name)
-     // console.log(data[0].maps)
-     // console.log(data[0].region)
-     // console.log(data[0].flags)
-     
 });

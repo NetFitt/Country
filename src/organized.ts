@@ -3,6 +3,7 @@
 const selected = document.querySelector(".selected")
 const selec = document.querySelector(".select")
 const grid = document.querySelector(".grid")
+const search = document.querySelector(".search") as HTMLInputElement
 
 selected.addEventListener("click" , ()=>{
     if(selec.classList.contains("open")) {
@@ -16,7 +17,7 @@ selected.addEventListener("click" , ()=>{
     }
 })
 
-
+// fetching and displaying informations 
 
 const getInfo = (url:string)=>{
     return new Promise((valid , unvalid) => {
@@ -43,17 +44,26 @@ getInfo("https://restcountries.com/v3.1/all")
         result.forEach((ele: any) => {
             let grid_item = document.createElement("div")
             grid_item.classList.add("grid_item")
+            enum info {
+                name = ele.name.common,
+                flag = ele.flags.png,
+                population = ele.population,
+                region = ele.region,
+                capital = ele.capital,
+                
+            }
+
             grid_item.innerHTML =`
-                <img src="${ele.flags.png}" alt="${ele.flags.png}">
-                <h3 class="grid_item_title">${ele.name.common}</h3>
+                <img src="${info.flag}" alt="${info.flag}">
+                <h3 class="grid_item_title">${info.name}</h3>
                 <div class="grid_item_text">
-                    <h5>Population:</h5><p> ${ele.population}</p>
+                    <h5>Population:</h5><p> ${info.population}</p>
                 </div class="grid_item_text">
                 <div class="grid_item_text">
-                    <h5>Region:</h5><p> ${ele.region}</p>
+                    <h5>Region:</h5><p> ${info.region}</p>
                 </div>
                 <div class="grid_item_text">
-                    <h5>Capital:</h5><p> ${ele.capital}</p>
+                    <h5>Capital:</h5><p> ${info.capital}</p>
                 </div>
             `;
             grid.appendChild(grid_item); 
@@ -61,7 +71,6 @@ getInfo("https://restcountries.com/v3.1/all")
         return result;
     }).then((result:any) => {
         let option = document.querySelectorAll(".select__menu_option")
-        
         
         
         option.forEach((ele)=> {
@@ -72,18 +81,17 @@ getInfo("https://restcountries.com/v3.1/all")
                 console.log(value)
                 
                 result.forEach((element:any)=>{
+                    enum info {
+                        name = element.name.common,
+                        flag = element.flags.png,
+                        population = element.population,
+                        region = element.region,
+                        capital = element.capital
+                    }
+
                     if(value == element.region){
                         let items = document.createElement("div")
                         items.classList.add("grid_item")
-                     
-                        enum info {
-                            name = element.name.common,
-                            flag = element.flags.png,
-                            population = element.population,
-                            region = element.region,
-                            capital = element.capital
-                        }
-
                         items.innerHTML = `
                             <img src="${info.flag}" alt="${info.flag}">
                             <h3 class="grid_item_title">${info.name}</h3>
@@ -102,5 +110,65 @@ getInfo("https://restcountries.com/v3.1/all")
                 })
             })
         })
+        return result;
+    }) 
+    .then((result)=>{ // the Input thing
+        
+        
+        
+        search.addEventListener("input",(e)=>{
+            // ================= FIRST METHODE =====================
+
+            // grid.innerHTML =""
+            // result.forEach((element:any)=>{
+            //     const target = e.target as HTMLInputElement;
+            //     const value = target.value;
+            //     console.log(value)
+                
+            //     if(element.name.common.includes(value) || element.region.includes(value)){
+            //         // console.log(element.name.common)
+            //         // let items = document.createElement("div")
+            //         //     items.classList.add("grid_item")
+                     
+            //             // enum info {
+            //             //     name = element.name.common,
+            //             //     flag = element.flags.png,
+            //             //     population = element.population,
+            //             //     region = element.region,
+            //             //     capital = element.capital
+            //             // }
+
+            //             // items.innerHTML = `
+            //             //     <img src="${info.flag}" alt="${info.flag}">
+            //             //     <h3 class="grid_item_title">${info.name}</h3>
+            //             //     <div class="grid_item_text">
+            //             //         <h5>Population:</h5><p> ${info.population}</p>
+            //             //     </div class="grid_item_text">
+            //             //     <div class="grid_item_text">
+            //             //         <h5>Region:</h5><p> ${info.region}</p>
+            //             //     </div>
+            //             //     <div class="grid_item_text">
+            //             //         <h5>Capital:</h5><p> ${info.capital}</p>
+            //             //     </div>
+            //             // `;
+            //             // grid.appendChild(items)
+            //     }
+            // })
+            //  ====================== BETTER METHODE ======================
+
+            const grid_item = document.querySelectorAll(".grid_item")
+            
+            grid_item.forEach(ele =>{
+                const target = e.target as HTMLInputElement;
+                const value = target.value;
+                if(!ele.childNodes[3].textContent.includes(value)){
+                    ele.classList.add("hide")
+                }else{
+                    ele.classList.remove("hide")
+                }
+                
+            })
+        })            
     })
+    .then()
     .catch((rej: Error)=> console.log(rej))

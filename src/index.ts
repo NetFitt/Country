@@ -18,7 +18,7 @@ btn.addEventListener("click",()=>{
 // btn is the selcted 
 const region = document.querySelectorAll(".select__menu_option");
 
-const search = (<HTMLInputElement>document.querySelector(".search"))
+const ser = (<HTMLInputElement>document.querySelector(".search"))
 
 const API = new XMLHttpRequest()
 API.open("GET" , "https://restcountries.com/v3.1/all")

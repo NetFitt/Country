@@ -75,6 +75,10 @@
           animation: fade-out 300ms ease-out forwards;
 }
 
+.hide {
+  display: none;
+}
+
 body {
   background-color: hsl(207deg, 26%, 17%);
 }

@@ -12,7 +12,7 @@ btn.addEventListener("click", () => {
     }
 });
 const region = document.querySelectorAll(".select__menu_option");
-const search = document.querySelector(".search");
+const ser = document.querySelector(".search");
 const API = new XMLHttpRequest();
 API.open("GET", "https://restcountries.com/v3.1/all");
 API.send();

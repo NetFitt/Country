@@ -37,6 +37,35 @@
     animation: fade-out 300ms  ease-out forwards;
 }
 
-.hide{
-    display: none;
+@keyframes rotate-in {
+    from{
+        rotate: 0deg;
+    }
+    1%{
+        rotate: 1deg;
+    }
+    to{
+        rotate: 180deg;
+    }
+}
+@keyframes rotate-out {
+    from{
+        rotate: 180deg;
+    }
+    1%{
+        rotate: 181deg;
+    }
+    to{
+        rotate: 360deg;
+    }
+}
+
+
+
+.rotate-in{
+    animation: rotate-in 0.5s ease-out forwards;
+}
+
+.rotate-out{
+    animation: rotate-out 0.5s ease-out forwards;
 }

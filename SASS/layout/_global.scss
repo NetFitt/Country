@@ -1,6 +1,10 @@
 //Import 
 @use "../Variables/Variables" as *;
 
+body{
+    background-color: $dark-background;
+}
+
 *{
     box-sizing: border-box;
     margin: 0;

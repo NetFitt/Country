@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
     <!-- Javascript File -->
-    <script src="dist/organized.js" defer></script>
+    <script src="dist/index.js" defer></script>
 </head>
 <body>
     <header>
@@ -23,22 +23,21 @@
                     <h1 class="title">Where in the World?</h1>
                 </a>
             </div>
-            <div class="nav__links">
-                <a href="#">
-                    <h2 class="light"><i class="fa-regular fa-moon"></i>Dark Mode</h2>
-                </a>
+            <div class="nav__links show-mode">
+                    <h2 class="light"><i class="fa-solid fa-moon"></i> Dark Mode</h2>
             </div>
         </nav>
     </header>
     <main >
         <div class="container">
             <div class="container__search">
-                <span><i class="fa-solid fa-magnifying-glass"></i></span><input class="search" type="text" placeholder="Search For Country...">
+                <span class="container__search_icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input class="search" type="text" placeholder="Search For a Country...">
             </div>
             <div class="container__origin">
                 <!-- the button FOR SELCET -->
                 <div class="selected">
-                    <h4>Filter by Region <i class="fa-solid fa-caret-down"></i></h4>
+                    <h4>Filter by Region <i class="fa-solid fa-caret-down icon"></i></h4>
                 </div>
                 <!-- THE SELECT the menu -->
                 <div class="select" >               

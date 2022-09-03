@@ -1,3 +1,7 @@
+body {
+  background-color: hsl(207deg, 26%, 17%);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -75,12 +79,59 @@
           animation: fade-out 300ms ease-out forwards;
 }
 
-.hide {
-  display: none;
+@-webkit-keyframes rotate-in {
+  from {
+    rotate: 0deg;
+  }
+  1% {
+    rotate: 1deg;
+  }
+  to {
+    rotate: 180deg;
+  }
 }
 
-body {
-  background-color: hsl(207deg, 26%, 17%);
+@keyframes rotate-in {
+  from {
+    rotate: 0deg;
+  }
+  1% {
+    rotate: 1deg;
+  }
+  to {
+    rotate: 180deg;
+  }
+}
+@-webkit-keyframes rotate-out {
+  from {
+    rotate: 180deg;
+  }
+  1% {
+    rotate: 181deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes rotate-out {
+  from {
+    rotate: 180deg;
+  }
+  1% {
+    rotate: 181deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+.rotate-in {
+  -webkit-animation: rotate-in 0.5s ease-out forwards;
+          animation: rotate-in 0.5s ease-out forwards;
+}
+
+.rotate-out {
+  -webkit-animation: rotate-out 0.5s ease-out forwards;
+          animation: rotate-out 0.5s ease-out forwards;
 }
 
 header {
@@ -112,15 +163,25 @@ main {
   margin: 0 auto;
 }
 main .container {
-  margin: 2.5rem 0 2.5rem 0;
+  height: 3.5rem;
+  margin: 2.5rem 0 3.2rem 0;
   display: flex;
   justify-content: space-between;
 }
+main .container__search {
+  position: relative;
+}
+main .container__search_icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 35px;
+}
 main .container__search .search {
   display: inline-block;
-  width: 24rem;
-  height: 3rem;
-  padding-left: 2.5rem;
+  width: 30rem;
+  height: 100%;
+  padding-left: 5rem;
   background-color: hsl(209deg, 23%, 22%);
   border: none;
   outline: none;
@@ -143,7 +204,7 @@ main .container__origin {
 }
 main .container__origin .selected {
   width: 11rem;
-  height: 3rem;
+  height: 100%;
   background-color: hsl(209deg, 23%, 22%);
   display: flex;
   justify-content: center;
@@ -161,7 +222,7 @@ main .container__origin .select {
   background-color: hsl(209deg, 23%, 22%);
   position: absolute;
   border-radius: 5px;
-  transition: 0.5S;
+  transition: 0.5s;
   opacity: 0;
 }
 main .container__origin .select__menu {
@@ -177,8 +238,9 @@ main .container__origin .select__menu_option {
 }
 main .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-content: center;
+  gap: 3.5rem;
 }
 main .grid_item {
   background-color: hsl(209deg, 23%, 22%);
@@ -200,4 +262,8 @@ main .grid_item img {
   border-top-right-radius: 5px;
   width: 100%;
   height: 150px;
+}
+
+.hide {
+  display: none;
 }/*# sourceMappingURL=Style.css.map */

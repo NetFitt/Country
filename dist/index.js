@@ -12,9 +12,6 @@ const elements = {
     list: document.querySelector("[data-list]"),
     glass: document.querySelector("[glass]"),
 };
-if (localStorage.getItem("dark_mode") == null) {
-    localStorage.setItem("dark_mode", "false");
-}
 elements.selected.addEventListener("click", () => {
     if (elements.icon.classList.contains("rotate-in")) {
         elements.icon.classList.remove("rotate-in");
@@ -33,7 +30,13 @@ elements.selected.addEventListener("click", () => {
         elements.select.classList.remove("close");
     }
 });
+if (localStorage.getItem("dark_mode") == null) {
+    localStorage.setItem("dark_mode", "false");
+}
 elements.btn_mode.addEventListener("click", () => {
+    if (localStorage.getItem("dark_mode") == null) {
+        localStorage.setItem("dark_mode", "false");
+    }
     if (localStorage.getItem("dark_mode") == "false") {
         elements.body.classList.remove("dark-mode");
         elements.list.classList.remove("dark-mode");
@@ -133,44 +136,20 @@ getInfo("https://restcountries.com/v3.1/all")
     let option = document.querySelectorAll(".select__menu_option");
     option.forEach((ele) => {
         ele.addEventListener("click", () => {
-            elements.grid.innerHTML = "";
             let value = ele.getAttribute("value");
-            console.log(value);
-            result.forEach((element) => {
-                let info;
-                (function (info) {
-                    info[info["name"] = element.name.common] = "name";
-                    info[info["flag"] = element.flags.png] = "flag";
-                    info[info["population"] = element.population] = "population";
-                    info[info["region"] = element.region] = "region";
-                    info[info["capital"] = element.capital] = "capital";
-                })(info || (info = {}));
-                if (value == element.region) {
-                    let items = document.createElement("div");
-                    items.setAttribute("grid-item", "");
-                    items.classList.add("grid_item");
-                    items.innerHTML = `
-                            <img class="grid_item_flags " src="${info.flag}" alt="${info.flag}">
-                            <h3 class="grid_item_title grid_item_text" grid-text>${info.name}</h3>
-                            <div class="grid_item_div">
-                                <h4 class="grid_item_text" grid-text>Population:</h4>
-                                <p class="grid_item_text" grid-text> ${info.population}</p>
-                            </div>
-                            <div class="grid_item_div">
-                                <h4 class="grid_item_text" grid-text>Region:</h4>
-                                <p class="grid_item_text" grid-text > ${info.region}</p>
-                            </div>
-                            <div class="grid_item_div">
-                                <h4 class="grid_item_text" grid-text>Capital:</h4>
-                                <p class="grid_item_text" grid-text> ${info.capital}</p>
-                            </div>
-                        `;
-                    elements.grid.appendChild(items);
+            const grid_item = document.querySelectorAll("[grid-item]");
+            grid_item.forEach((element) => {
+                const region = element.childNodes[7].childNodes[3].textContent;
+                console.log(region.includes(value));
+                if (!region.includes(value)) {
+                    element.classList.add("hide");
+                }
+                else {
+                    element.classList.remove("hide");
                 }
             });
         });
     });
-    return result;
 })
     .then(() => {
     elements.search.addEventListener("input", (e) => {
@@ -194,6 +173,9 @@ getInfo("https://restcountries.com/v3.1/all")
     const grid_text = document.querySelectorAll("[grid-text]");
     console.log(grid_item, 1);
     elements.btn_mode.addEventListener("click", () => {
+        if (localStorage.getItem("dark_mode") == null) {
+            localStorage.setItem("dark_mode", "false");
+        }
         grid_item.forEach(element => {
             if (theme == "false") {
                 element.classList.add("grid_item");

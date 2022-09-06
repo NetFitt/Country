@@ -20,14 +20,10 @@ const elements:any = {
 
 // this is the selected btn
 
-if(localStorage.getItem("dark_mode")== null){
 
-    localStorage.setItem("dark_mode" , "false")
-}
 
 elements.selected.addEventListener("click" , ()=>{
     
-  
 
     if(elements.icon.classList.contains("rotate-in")){
         elements.icon.classList.remove("rotate-in")
@@ -49,10 +45,24 @@ elements.selected.addEventListener("click" , ()=>{
 })
 
 // Dark mode
+if(localStorage.getItem("dark_mode")== null){
+
+    localStorage.setItem("dark_mode" , "false")
+}
+
+
 
 elements.btn_mode.addEventListener("click" ,()=>{
 
+
+    if(localStorage.getItem("dark_mode") == null){
+        localStorage.setItem("dark_mode" , "false")
+    }
+
+
     if(localStorage.getItem("dark_mode") == "false"){
+        
+        
         elements.body.classList.remove("dark-mode")
         elements.list.classList.remove("dark-mode")
         elements.glass.classList.remove("dark-mode_glass")
@@ -177,45 +187,52 @@ getInfo("https://restcountries.com/v3.1/all")
         option.forEach((ele)=> {
             
             ele.addEventListener("click",()=>{
-                elements.grid.innerHTML = "";
-                let value = ele.getAttribute("value")
-                console.log(value)
                 
-                result.forEach((element:any)=>{
-                    enum info {
-                        name = element.name.common,
-                        flag = element.flags.png,
-                        population = element.population,
-                        region = element.region,
-                        capital = element.capital
+                let value = ele.getAttribute("value")
+
+                const grid_item = document.querySelectorAll("[grid-item]")
+                
+                
+                
+                grid_item.forEach((element:any)=>{
+
+                    const region = element.childNodes[7].childNodes[3].textContent
+                    
+                    
+                    console.log(region.includes(value));
+                    
+                    if(!region.includes(value)){
+                        
+                        
+                        element.classList.add("hide")
+                        // let items = document.createElement("div")
+                        // items.setAttribute("grid-item", "")
+                        // items.classList.add("grid_item")
+                        // items.innerHTML = `
+                        //     <img class="grid_item_flags " src="${info.flag}" alt="${info.flag}">
+                        //     <h3 class="grid_item_title grid_item_text" grid-text>${info.name}</h3>
+                        //     <div class="grid_item_div">
+                        //         <h4 class="grid_item_text" grid-text>Population:</h4>
+                        //         <p class="grid_item_text" grid-text> ${info.population}</p>
+                        //     </div>
+                        //     <div class="grid_item_div">
+                        //         <h4 class="grid_item_text" grid-text>Region:</h4>
+                        //         <p class="grid_item_text" grid-text > ${info.region}</p>
+                        //     </div>
+                        //     <div class="grid_item_div">
+                        //         <h4 class="grid_item_text" grid-text>Capital:</h4>
+                        //         <p class="grid_item_text" grid-text> ${info.capital}</p>
+                        //     </div>
+                        // `;
+                        // elements.grid.appendChild(items)
+                    
+                    }else{
+                        element.classList.remove("hide")
                     }
 
-                    if(value == element.region){
-                        let items = document.createElement("div")
-                        items.setAttribute("grid-item", "")
-                        items.classList.add("grid_item")
-                        items.innerHTML = `
-                            <img class="grid_item_flags " src="${info.flag}" alt="${info.flag}">
-                            <h3 class="grid_item_title grid_item_text" grid-text>${info.name}</h3>
-                            <div class="grid_item_div">
-                                <h4 class="grid_item_text" grid-text>Population:</h4>
-                                <p class="grid_item_text" grid-text> ${info.population}</p>
-                            </div>
-                            <div class="grid_item_div">
-                                <h4 class="grid_item_text" grid-text>Region:</h4>
-                                <p class="grid_item_text" grid-text > ${info.region}</p>
-                            </div>
-                            <div class="grid_item_div">
-                                <h4 class="grid_item_text" grid-text>Capital:</h4>
-                                <p class="grid_item_text" grid-text> ${info.capital}</p>
-                            </div>
-                        `;
-                        elements.grid.appendChild(items)
-                    }
                 })
             })
         })
-        return result;
     }) 
     .then(()=>{ // the Input thing
 
@@ -263,6 +280,7 @@ getInfo("https://restcountries.com/v3.1/all")
                 const target = e.target as HTMLInputElement;
                 const value = target.value.toUpperCase()
                 const nome = ele.childNodes[3].textContent.toUpperCase()
+
                 if(!nome.includes(value)){
                     ele.classList.add("hide")
                 }else{
@@ -282,6 +300,10 @@ getInfo("https://restcountries.com/v3.1/all")
         
     
         elements.btn_mode.addEventListener("click" , ()=>{
+            if(localStorage.getItem("dark_mode")== null){
+
+                localStorage.setItem("dark_mode" , "false")
+            }
             
             grid_item.forEach(element =>{
                 if(theme == "false"){

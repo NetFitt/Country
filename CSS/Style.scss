@@ -4,6 +4,10 @@
 @use "../SASS/layout/global" as *;
 @use "../SASS/layout/animations" as *;
 
+
+
+// normal
+
 header{
     height: 5rem;
     display: flex;
@@ -26,6 +30,7 @@ header{
                 font-size: 1rem;
                 font-weight: 600;
             }
+            cursor: pointer;
         }
     }
 }
@@ -117,23 +122,27 @@ main{
             background-color: $dark-elements;
             border-radius: 5px;
             &_title{
-                margin: 10px;
-            }
-            &_text{
                 margin: {
-                    left: 10px;
-                    bottom: 5px;
+                    top: 15px;
+                    left: 15px;
+                    bottom: 15px;
                 };
             }
-            h5 , p {
-                display: inline;
-                font-size: 1rem;
+            &_div{
+                margin: {
+                    left: 15px;
+                    bottom: 10px;
+                };
             }
-            img{
+            &_text {
+                display: inline-block;
+                
+            }
+            &_flags{
                 border-top-left-radius: 5px; 
                 border-top-right-radius: 5px;
                 width: 100%;
-                height: 150px;
+                height: 165px;
             }
         }
     }
@@ -142,3 +151,6 @@ main{
 .hide{
     display: none;
 }
+
+// dark mode
+

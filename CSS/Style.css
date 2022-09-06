@@ -1,7 +1,3 @@
-body {
-  background-color: hsl(207deg, 26%, 17%);
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,6 +5,39 @@ body {
   color: white;
   font-family: "Nunito Sans";
   text-decoration: none;
+}
+
+body {
+  background-color: hsl(207deg, 26%, 17%);
+}
+
+.dark-mode {
+  background-color: hsl(0deg, 0%, 98%) !important;
+}
+.dark-mode_elements {
+  background-color: white !important;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 5px !important;
+}
+.dark-mode_text {
+  color: black !important;
+}
+.dark-mode_input {
+  background-color: white !important;
+  color: black !important;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05) !important;
+}
+.dark-mode_input::-moz-placeholder {
+  color: hsl(0deg, 0%, 52%) !important;
+}
+.dark-mode_input:-ms-input-placeholder {
+  color: hsl(0deg, 0%, 52%) !important;
+}
+.dark-mode_input::placeholder {
+  color: hsl(0deg, 0%, 52%) !important;
+}
+.dark-mode_glass {
+  color: hsl(0deg, 0%, 52%) !important;
 }
 
 @-webkit-keyframes fade-in {
@@ -150,6 +179,9 @@ header .nav {
   margin: 0 auto;
   color: white;
 }
+header .nav__links {
+  cursor: pointer;
+}
 header .nav__links .title {
   font-size: 1.6rem;
 }
@@ -247,21 +279,22 @@ main .grid_item {
   border-radius: 5px;
 }
 main .grid_item_title {
-  margin: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+main .grid_item_div {
+  margin-left: 15px;
+  margin-bottom: 10px;
 }
 main .grid_item_text {
-  margin-left: 10px;
-  margin-bottom: 5px;
+  display: inline-block;
 }
-main .grid_item h5, main .grid_item p {
-  display: inline;
-  font-size: 1rem;
-}
-main .grid_item img {
+main .grid_item_flags {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   width: 100%;
-  height: 150px;
+  height: 165px;
 }
 
 .hide {

@@ -1,34 +1,114 @@
 
 
 
-const selected = document.querySelector(".selected")
-const selec = document.querySelector(".select")
-const grid = document.querySelector(".grid")
-const search = document.querySelector(".search") as HTMLInputElement
-const icon = document.querySelector(".icon")
+const elements:any = {
+    selected : document.querySelector(".selected"),
+    select : document.querySelector(".select"),
+    grid : document.querySelector(".grid"),
+    search : document.querySelector(".search") as HTMLInputElement,
+    icon : document.querySelector(".icon"),
+    
+// for darkmode
+    header : document.querySelector("header"),
+    btn_mode : document.querySelector(".btn-mode"),
+    body : document.querySelector("body"),
+    text : document.querySelectorAll("[data-text]"),
+    list : document.querySelector("[data-list]"),
+    glass : document.querySelector("[glass]"),
 
-selected.addEventListener("click" , ()=>{
-    if(icon.classList.contains("rotate-in")){
-        icon.classList.remove("rotate-in")
-        icon.classList.add("rotate-out")
+}
+
+// this is the selected btn
+
+if(localStorage.getItem("dark_mode")== null){
+
+    localStorage.setItem("dark_mode" , "false")
+}
+
+elements.selected.addEventListener("click" , ()=>{
+    
+  
+
+    if(elements.icon.classList.contains("rotate-in")){
+        elements.icon.classList.remove("rotate-in")
+        elements.icon.classList.add("rotate-out")
     }
     else{
-        icon.classList.add("rotate-in")
-        icon.classList.remove("rotate-out")
-    }
-    
-    
-
-    if(selec.classList.contains("open")) {
-
-        selec.classList.add("close");
-        selec.classList.remove("open");
+        elements.icon.classList.add("rotate-in")
+        elements.icon.classList.remove("rotate-out")
+    }   
+    if(elements.select.classList.contains("open")) {
+        elements.select.classList.add("close");
+        elements.select.classList.remove("open");
     }
     else {
-        selec.classList.add("open");
-        selec.classList.remove("close");
+        elements.select.classList.add("open");
+        elements.select.classList.remove("close");
     }
+
 })
+
+// Dark mode
+
+elements.btn_mode.addEventListener("click" ,()=>{
+
+    if(localStorage.getItem("dark_mode") == "false"){
+        elements.body.classList.remove("dark-mode")
+        elements.list.classList.remove("dark-mode")
+        elements.glass.classList.remove("dark-mode_glass")
+        elements.header.classList.remove("dark-mode")
+        elements.search.classList.remove("dark-mode_input")
+        elements.selected.classList.remove("dark-mode_elements")
+        
+
+        elements.text.forEach((element:any)=>{
+            element.classList.remove("dark-mode_text")    
+        })
+
+    }
+    else{
+        elements.body.classList.add("dark-mode")
+        elements.list.classList.add("dark-mode")
+        elements.glass.classList.add("dark-mode_glass")
+        elements.header.classList.add("dark-mode")
+        elements.search.classList.add("dark-mode_input")
+        elements.selected.classList.add("dark-mode_elements")
+
+        elements.text.forEach((element:any)=>{
+            element.classList.add("dark-mode_text")    
+        })
+    
+    }
+
+
+})
+
+if(localStorage.getItem("dark_mode") == "true"){
+    elements.body.classList.remove("dark-mode")
+    elements.list.classList.remove("dark-mode")
+    elements.glass.classList.remove("dark-mode_glass")
+    elements.header.classList.remove("dark-mode")
+    elements.search.classList.remove("dark-mode_input")
+    elements.selected.classList.remove("dark-mode_elements")
+
+    elements.text.forEach((element:any)=>{
+        element.classList.remove("dark-mode_text")    
+    })
+
+}else{
+    elements.body.classList.add("dark-mode")
+    elements.list.classList.add("dark-mode")
+    elements.glass.classList.add("dark-mode_glass")
+    elements.header.classList.add("dark-mode")
+    elements.search.classList.add("dark-mode_input")
+    elements.selected.classList.add("dark-mode_elements")
+
+    elements.text.forEach((element:any)=>{
+        element.classList.add("dark-mode_text")    
+    })
+
+}
+
 
 // fetching and displaying informations 
 
@@ -37,7 +117,6 @@ const getInfo = (url:string)=>{
         let myRequest = new XMLHttpRequest();
         myRequest.onload = function () {
             if(myRequest.readyState == 4 && myRequest.status == 200){
-
                 valid(JSON.parse(this.responseText));
 
             }else{
@@ -52,34 +131,43 @@ const getInfo = (url:string)=>{
 
 }
 
+// API FETCHING DATA FOR REAL
+
 getInfo("https://restcountries.com/v3.1/all")
     .then((result:any)=>{
         result.forEach((ele: any) => {
-            let grid_item = document.createElement("div")
-            grid_item.classList.add("grid_item")
-            enum info {
-                name = ele.name.common,
-                flag = ele.flags.png,
-                population = ele.population,
-                region = ele.region,
-                capital = ele.capital,
-                
-            }
+            if(!(ele.name.common == "Israel")){
 
-            grid_item.innerHTML =`
-                <img src="${info.flag}" alt="${info.flag}">
-                <h3 class="grid_item_title">${info.name}</h3>
-                <div class="grid_item_text">
-                    <h5>Population:</h5><p> ${info.population}</p>
-                </div class="grid_item_text">
-                <div class="grid_item_text">
-                    <h5>Region:</h5><p> ${info.region}</p>
-                </div>
-                <div class="grid_item_text">
-                    <h5>Capital:</h5><p> ${info.capital}</p>
-                </div>
-            `;
-            grid.appendChild(grid_item); 
+                let grid_item = document.createElement("div")
+                grid_item.setAttribute("grid-item" , "")
+                grid_item.classList.add("grid_item")
+                enum info {
+                    name = ele.name.common,
+                    flag = ele.flags.png,
+                    population = ele.population,
+                    region = ele.region,
+                    capital = ele.capital,
+                    
+                }
+
+                grid_item.innerHTML =`
+                    <img class="grid_item_flags" src="${info.flag}" alt="${info.flag}">
+                    <h3 class="grid_item_title grid_item_text" grid-text>${info.name}</h3>
+                    <div class="grid_item_div">
+                        <h4 class="grid_item_text" grid-text>Population:</h4>
+                        <p class="grid_item_text" grid-text> ${info.population}</p>
+                    </div>
+                    <div class="grid_item_div">
+                        <h4 class="grid_item_text" grid-text>Region:</h4>
+                        <p class="grid_item_text" grid-text> ${info.region}</p>
+                    </div>
+                    <div class="grid_item_div">
+                        <h4 class="grid_item_text" grid-text>Capital:</h4>
+                        <p class="grid_item_text" grid-text> ${info.capital}</p>
+                    </div>
+                `;
+                elements.grid.appendChild(grid_item);
+            } 
         });
         return result;
     }).then((result:any) => {
@@ -89,7 +177,7 @@ getInfo("https://restcountries.com/v3.1/all")
         option.forEach((ele)=> {
             
             ele.addEventListener("click",()=>{
-                grid.innerHTML = "";
+                elements.grid.innerHTML = "";
                 let value = ele.getAttribute("value")
                 console.log(value)
                 
@@ -104,21 +192,25 @@ getInfo("https://restcountries.com/v3.1/all")
 
                     if(value == element.region){
                         let items = document.createElement("div")
+                        items.setAttribute("grid-item", "")
                         items.classList.add("grid_item")
                         items.innerHTML = `
-                            <img src="${info.flag}" alt="${info.flag}">
-                            <h3 class="grid_item_title">${info.name}</h3>
-                            <div class="grid_item_text">
-                                <h5>Population:</h5><p> ${info.population}</p>
-                            </div class="grid_item_text">
-                            <div class="grid_item_text">
-                                <h5>Region:</h5><p> ${info.region}</p>
+                            <img class="grid_item_flags " src="${info.flag}" alt="${info.flag}">
+                            <h3 class="grid_item_title grid_item_text" grid-text>${info.name}</h3>
+                            <div class="grid_item_div">
+                                <h4 class="grid_item_text" grid-text>Population:</h4>
+                                <p class="grid_item_text" grid-text> ${info.population}</p>
                             </div>
-                            <div class="grid_item_text">
-                                <h5>Capital:</h5><p> ${info.capital}</p>
+                            <div class="grid_item_div">
+                                <h4 class="grid_item_text" grid-text>Region:</h4>
+                                <p class="grid_item_text" grid-text > ${info.region}</p>
+                            </div>
+                            <div class="grid_item_div">
+                                <h4 class="grid_item_text" grid-text>Capital:</h4>
+                                <p class="grid_item_text" grid-text> ${info.capital}</p>
                             </div>
                         `;
-                        grid.appendChild(items)
+                        elements.grid.appendChild(items)
                     }
                 })
             })
@@ -127,9 +219,8 @@ getInfo("https://restcountries.com/v3.1/all")
     }) 
     .then(()=>{ // the Input thing
 
-        search.addEventListener("input",(e)=>{
+        elements.search.addEventListener("input",(e:any)=>{
             // ================= FIRST METHODE =====================
-
             // grid.innerHTML =""
             // result.forEach((element:any)=>{
             //     const target = e.target as HTMLInputElement;
@@ -166,29 +257,89 @@ getInfo("https://restcountries.com/v3.1/all")
             //     }
             // })
             //  ====================== BETTER METHODE ======================
-
-            const grid_item = document.querySelectorAll(".grid_item")
+            let grid_item = document.querySelectorAll("[grid-item]")
             
             grid_item.forEach(ele =>{
                 const target = e.target as HTMLInputElement;
-                const value = target.value;
-                if(!ele.childNodes[3].textContent.includes(value)){
+                const value = target.value.toUpperCase()
+                const nome = ele.childNodes[3].textContent.toUpperCase()
+                if(!nome.includes(value)){
                     ele.classList.add("hide")
                 }else{
                     ele.classList.remove("hide")
                 }
-                
             })
         })            
     })
+    .then(()=>{
+
+
+        let theme:string = localStorage.getItem("dark_mode");
+        const grid_item = document.querySelectorAll("[grid-item]")
+        const grid_text = document.querySelectorAll("[grid-text]")
+        console.log(grid_item , 1);
+        
+        
+    
+        elements.btn_mode.addEventListener("click" , ()=>{
+            
+            grid_item.forEach(element =>{
+                if(theme == "false"){
+                    element.classList.add("grid_item")
+                    element.classList.remove("dark-mode_elements")
+                }else{
+                    element.classList.add("dark-mode_elements") 
+                    element.classList.remove("grid_item")
+                }
+        
+            })
+
+            grid_text.forEach(element =>{
+                if(theme == "false"){
+                    element.classList.remove("dark-mode_text")
+                }
+                else{
+                    element.classList.add("dark-mode_text")
+                }
+            })
+
+            if(localStorage.getItem("dark_mode") == "true"){
+                theme = "false";
+            }
+            else{
+                theme = "true";
+            }
+            localStorage.setItem("dark_mode" , theme)
+        })
+
+        // grid back-ground
+        grid_item.forEach(element =>{
+            if(theme == "true"){
+                element.classList.add("grid_item")
+                element.classList.remove("dark-mode_elements") 
+            }
+            else{
+                element.classList.add("dark-mode_elements")
+                element.classList.remove("grid_item")
+            }
+        })
+
+        // for grid text
+        grid_text.forEach(element =>{
+            if(theme == "true"){
+                element.classList.remove("dark-mode_text")
+            }
+            else{
+                element.classList.add("dark-mode_text")
+            }
+        })
+        
+        
+    })    
     .catch((rej: Error)=> console.log(rej))
 
+
 // Dark Mode please 
-
-localStorage.setItem("light-text" , "hsl(200, 15%, 8%)")
-localStorage.setItem("light-input" , "hsl(0, 0%, 52%)")
-localStorage.setItem("light-elements" , "hsl(0, 0%, 98%)")
-
 
 
 
@@ -199,3 +350,4 @@ localStorage.setItem("light-elements" , "hsl(0, 0%, 98%)")
 // $dark-Text:hsl(200, 15%, 8%);
 // $dark-elements: hsl(209, 23%, 22%);
 // $dark-background:hsl(207, 26%, 17%);
+

@@ -189,16 +189,18 @@ getInfo("https://restcountries.com/v3.1/all")
                         region: ele.region,
                         capital: ele.capital,
                         sub_region: ele.subregion,
-                        borders: ele.borders,
+                        borders: [ele.borders],
                         lang: Object.values(ele.languages),
                         tld: ele.tld,
                     };
+                    if (info.borders == undefined) {
+                        console.log("none");
+                    }
                     let cur = ele.currencies;
                     let curr;
                     for (const val in cur) {
                         curr = cur[val].name;
                     }
-                    console.log(ele.borders);
                     detail.innerHTML = `
 
                             
@@ -218,8 +220,9 @@ getInfo("https://restcountries.com/v3.1/all")
                                     <p grid-text>Currencie: ${curr}</p>
                                     <p grid-text>languages: ${info.lang.map((ele) => { return ele; })}</p>
                                 </div>
-
-                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele) => { return `<div class="detail_info_borders_border">${ele}</div>`; }).join('')}</p></div>
+                                
+                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele) => { if (ele)
+                        return `<div class="detail_info_borders_border">${ele}</div>`; }).join('')}</p></div>
                             </div>
                             `;
                     elements.back.after(detail);

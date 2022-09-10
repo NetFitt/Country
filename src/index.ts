@@ -277,15 +277,20 @@ getInfo("https://restcountries.com/v3.1/all")
                             region : ele.region,
                             capital : ele.capital,
                             sub_region : ele.subregion,
-                            borders : ele.borders,
+                            borders : [ele.borders],
                             lang : Object.values(ele.languages),
                             tld : ele.tld,
                             
                         }
                         
-                        
-                        
 
+                        if(info.borders == undefined){
+                            console.log("none");
+                            
+                        }
+                        
+                        
+                        
                         
                         // for currencys
                         let cur = ele.currencies;
@@ -293,8 +298,8 @@ getInfo("https://restcountries.com/v3.1/all")
                         for(const val in cur){
                             curr = cur[val].name
                         }
-                        console.log(ele.borders);
                         
+                        //there is a bug where a country does not have borders 
                         detail.innerHTML = `
 
                             
@@ -312,10 +317,10 @@ getInfo("https://restcountries.com/v3.1/all")
                                 <div class="detail_info_more">
                                     <p grid-text>Top Level Domain: ${info.tld}</p>
                                     <p grid-text>Currencie: ${curr}</p>
-                                    <p grid-text>languages: ${info.lang.map((ele:any)=>{ return ele})}</p>
+                                    <p grid-text>languages: ${ info.lang.map((ele:any)=>{ return ele})}</p>
                                 </div>
-
-                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele:any)=>{return `<div class="detail_info_borders_border">${ele}</div>`}).join('')}</p></div>
+                                
+                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele:any)=>{if(ele) return `<div class="detail_info_borders_border">${ele}</div>`}).join('')}</p></div>
                             </div>
                             `;
                             

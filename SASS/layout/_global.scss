@@ -15,7 +15,9 @@ body{
 }
 
 .dark-mode {
+    
     background-color: $light-elements !important; 
+
     &_elements{
         background-color: white !important;
         box-shadow: 5px 5px 5px 5px rgb(0 0 0 / 5%) !important;

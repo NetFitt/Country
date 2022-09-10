@@ -11,6 +11,9 @@ const elements = {
     text: document.querySelectorAll("[data-text]"),
     list: document.querySelector("[data-list]"),
     glass: document.querySelector("[glass]"),
+    all_items: document.querySelector(".all_countries"),
+    country: document.querySelector(".country"),
+    back: document.querySelector(".country_back"),
 };
 elements.selected.addEventListener("click", () => {
     if (elements.icon.classList.contains("rotate-in")) {
@@ -40,8 +43,9 @@ elements.btn_mode.addEventListener("click", () => {
     if (localStorage.getItem("dark_mode") == "false") {
         elements.body.classList.remove("dark-mode");
         elements.list.classList.remove("dark-mode");
-        elements.glass.classList.remove("dark-mode_glass");
         elements.header.classList.remove("dark-mode");
+        elements.back.classList.remove("dark-mode_elements");
+        elements.glass.classList.remove("dark-mode_glass");
         elements.search.classList.remove("dark-mode_input");
         elements.selected.classList.remove("dark-mode_elements");
         elements.text.forEach((element) => {
@@ -55,6 +59,7 @@ elements.btn_mode.addEventListener("click", () => {
         elements.header.classList.add("dark-mode");
         elements.search.classList.add("dark-mode_input");
         elements.selected.classList.add("dark-mode_elements");
+        elements.back.classList.add("dark-mode_elements");
         elements.text.forEach((element) => {
             element.classList.add("dark-mode_text");
         });
@@ -67,6 +72,7 @@ if (localStorage.getItem("dark_mode") == "true") {
     elements.header.classList.remove("dark-mode");
     elements.search.classList.remove("dark-mode_input");
     elements.selected.classList.remove("dark-mode_elements");
+    elements.back.classList.remove("dark-mode_elements");
     elements.text.forEach((element) => {
         element.classList.remove("dark-mode_text");
     });
@@ -78,6 +84,7 @@ else {
     elements.header.classList.add("dark-mode");
     elements.search.classList.add("dark-mode_input");
     elements.selected.classList.add("dark-mode_elements");
+    elements.back.classList.add("dark-mode_elements");
     elements.text.forEach((element) => {
         element.classList.add("dark-mode_text");
     });
@@ -131,8 +138,6 @@ getInfo("https://restcountries.com/v3.1/all")
             elements.grid.appendChild(grid_item);
         }
     });
-    return result;
-}).then((result) => {
     let option = document.querySelectorAll(".select__menu_option");
     option.forEach((ele) => {
         ele.addEventListener("click", () => {
@@ -140,42 +145,104 @@ getInfo("https://restcountries.com/v3.1/all")
             const grid_item = document.querySelectorAll("[grid-item]");
             grid_item.forEach((element) => {
                 const region = element.childNodes[7].childNodes[3].textContent;
-                console.log(region.includes(value));
-                if (!region.includes(value)) {
-                    element.classList.add("hide");
-                }
-                else {
-                    element.classList.remove("hide");
+                if (!element.classList.contains("hide")) {
+                    if (!region.includes(value)) {
+                        element.classList.add("hide-region");
+                    }
+                    else {
+                        element.classList.remove("hide-region");
+                    }
                 }
             });
         });
     });
-})
-    .then(() => {
     elements.search.addEventListener("input", (e) => {
-        let grid_item = document.querySelectorAll("[grid-item]");
+        const grid_item = document.querySelectorAll("[grid-item]");
         grid_item.forEach(ele => {
             const target = e.target;
             const value = target.value.toUpperCase();
             const nome = ele.childNodes[3].textContent.toUpperCase();
-            if (!nome.includes(value)) {
-                ele.classList.add("hide");
-            }
-            else {
-                ele.classList.remove("hide");
+            if (!ele.classList.contains("hide-region")) {
+                if (!nome.includes(value)) {
+                    ele.classList.add("hide");
+                }
+                else {
+                    ele.classList.remove("hide");
+                }
             }
         });
     });
-})
-    .then(() => {
-    let theme = localStorage.getItem("dark_mode");
     const grid_item = document.querySelectorAll("[grid-item]");
+    grid_item.forEach(element => {
+        element.addEventListener("click", () => {
+            elements.all_items.classList.add("hide");
+            elements.country.classList.remove("hide");
+            result.forEach((ele) => {
+                if (element.childNodes[3].textContent == ele.name.common) {
+                    const detail = document.createElement("div");
+                    detail.classList.add("detail");
+                    const info = {
+                        name: ele.name.common,
+                        native: ele.name.official,
+                        flag: ele.flags.png,
+                        population: ele.population,
+                        region: ele.region,
+                        capital: ele.capital,
+                        sub_region: ele.subregion,
+                        borders: ele.borders,
+                        lang: Object.values(ele.languages),
+                        tld: ele.tld,
+                    };
+                    let cur = ele.currencies;
+                    let curr;
+                    for (const val in cur) {
+                        curr = cur[val].name;
+                    }
+                    console.log(ele.borders);
+                    detail.innerHTML = `
+
+                            
+                            <img class="detail_img" src="${info.flag}" alt="${info.name}">
+                            <div class="detail_info">
+                                <div class="detail_info_name">
+                                    <h1 grid-text>${info.name}</h1>
+                                    <p grid-text >Native Name: ${info.native}</p>
+                                    <p grid-text >Population: ${info.population}</p>
+                                    <p grid-text>Region: ${info.region} </p>
+                                    <p grid-text>Sub Region: ${info.sub_region}</p>
+                                    <p grid-text>Capital: ${info.capital}</p>
+                                </div>
+
+                                <div class="detail_info_more">
+                                    <p grid-text>Top Level Domain: ${info.tld}</p>
+                                    <p grid-text>Currencie: ${curr}</p>
+                                    <p grid-text>languages: ${info.lang.map((ele) => { return ele; })}</p>
+                                </div>
+
+                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele) => { return `<div class="detail_info_borders_border">${ele}</div>`; }).join('')}</p></div>
+                            </div>
+                            `;
+                    elements.back.after(detail);
+                    const text = document.querySelectorAll("[grid-text]");
+                    text.forEach(element => {
+                        if (theme == "true") {
+                            element.classList.remove("dark-mode_text");
+                        }
+                        else {
+                            element.classList.add("dark-mode_text");
+                        }
+                    });
+                }
+            });
+        });
+    });
+    let theme = localStorage.getItem("dark_mode");
     const grid_text = document.querySelectorAll("[grid-text]");
-    console.log(grid_item, 1);
     elements.btn_mode.addEventListener("click", () => {
         if (localStorage.getItem("dark_mode") == null) {
             localStorage.setItem("dark_mode", "false");
         }
+        const grid_text = document.querySelectorAll("[grid-text]");
         grid_item.forEach(element => {
             if (theme == "false") {
                 element.classList.add("grid_item");
@@ -204,12 +271,10 @@ getInfo("https://restcountries.com/v3.1/all")
     });
     grid_item.forEach(element => {
         if (theme == "true") {
-            element.classList.add("grid_item");
             element.classList.remove("dark-mode_elements");
         }
         else {
             element.classList.add("dark-mode_elements");
-            element.classList.remove("grid_item");
         }
     });
     grid_text.forEach(element => {
@@ -219,6 +284,12 @@ getInfo("https://restcountries.com/v3.1/all")
         else {
             element.classList.add("dark-mode_text");
         }
+    });
+    elements.back.addEventListener("click", () => {
+        const country_detail = document.querySelector(".detail");
+        elements.all_items.classList.remove("hide");
+        country_detail.innerHTML = "";
+        elements.country.classList.add("hide");
     });
 })
     .catch((rej) => console.log(rej));

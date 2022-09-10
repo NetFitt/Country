@@ -3,6 +3,7 @@
 @use  "../SASS/Variables/Variables" as *;
 @use "../SASS/layout/global" as *;
 @use "../SASS/layout/animations" as *;
+@use "../SASS/layout/media" as *;
 
 
 
@@ -39,6 +40,7 @@ header{
 main{
     width: 90%;
     margin: 0 auto;
+    
     .container{        
         height: 3.5rem;
         margin: 2.5rem 0 3.2rem 0;
@@ -48,6 +50,7 @@ main{
         // [0] the text input
         &__search{
             position: relative;
+            width: 60%;
             &_icon{
                 position: absolute;
                 top: 50%;
@@ -56,7 +59,7 @@ main{
             }
             .search{
                 display: inline-block;
-                width:30rem;
+                width:100%;
                 height: 100%;
                 padding-left: 5rem;
                 background-color: $dark-elements;
@@ -121,6 +124,8 @@ main{
         &_item{
             background-color: $dark-elements;
             border-radius: 5px;
+            padding-bottom: 30px;
+            cursor: pointer;
             &_title{
                 margin: {
                     top: 15px;
@@ -147,10 +152,66 @@ main{
         }
     }
 }
-
+// dark mode
 .hide{
     display: none;
+    &-region{
+        @extend .hide;
+    }
 }
 
-// dark mode
+
+// Country
+.country{
+    &_back{
+        background-color: $dark-elements;
+        border-radius: 5px;
+        height: 2rem;
+        margin: 3rem 0;
+        justify-content: space-around;
+        display: flex;
+        width: 5rem;
+        align-items: center;
+        cursor: pointer;
+        
+    }
+
+    .detail{
+        
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        &_img{
+            width: 400px;
+        }
+        &_info{
+            display: grid;
+            gap: 20px;
+            width: 600px;
+            justify-content: center;
+            grid-template-columns: repeat( auto-fill ,minmax(300px , 1fr)) ;
+            grid-template-rows: 1fr auto ;
+            &_more{
+                margin-top: 43px;
+            }
+            &_borders{
+                @extend .detail;
+                align-items: center;
+                
+                &_border{
+                    display: flex;
+                    background-color: $dark-elements;
+                    padding: 5px;
+                    border-radius: 5px;
+                    margin-left: 5px;
+
+                }
+            }
+           
+        }
+    }
+
+}
+
+
 

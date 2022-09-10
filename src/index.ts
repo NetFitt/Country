@@ -9,21 +9,27 @@ const elements:any = {
     icon : document.querySelector(".icon"),
     
 // for darkmode
-    header : document.querySelector("header"),
+    header : document.querySelector("header"),  
     btn_mode : document.querySelector(".btn-mode"),
     body : document.querySelector("body"),
     text : document.querySelectorAll("[data-text]"),
     list : document.querySelector("[data-list]"),
     glass : document.querySelector("[glass]"),
 
+    // country detail
+    all_items : document.querySelector(".all_countries"),
+    country : document.querySelector(".country"),
+    back : document.querySelector(".country_back"),
+    
 }
 
+
 // this is the selected btn
-
-
-
+ 
+ 
 elements.selected.addEventListener("click" , ()=>{
     
+ 
 
     if(elements.icon.classList.contains("rotate-in")){
         elements.icon.classList.remove("rotate-in")
@@ -65,8 +71,9 @@ elements.btn_mode.addEventListener("click" ,()=>{
         
         elements.body.classList.remove("dark-mode")
         elements.list.classList.remove("dark-mode")
-        elements.glass.classList.remove("dark-mode_glass")
         elements.header.classList.remove("dark-mode")
+        elements.back.classList.remove("dark-mode_elements")
+        elements.glass.classList.remove("dark-mode_glass")
         elements.search.classList.remove("dark-mode_input")
         elements.selected.classList.remove("dark-mode_elements")
         
@@ -83,7 +90,7 @@ elements.btn_mode.addEventListener("click" ,()=>{
         elements.header.classList.add("dark-mode")
         elements.search.classList.add("dark-mode_input")
         elements.selected.classList.add("dark-mode_elements")
-
+        elements.back.classList.add("dark-mode_elements")
         elements.text.forEach((element:any)=>{
             element.classList.add("dark-mode_text")    
         })
@@ -100,6 +107,7 @@ if(localStorage.getItem("dark_mode") == "true"){
     elements.header.classList.remove("dark-mode")
     elements.search.classList.remove("dark-mode_input")
     elements.selected.classList.remove("dark-mode_elements")
+    elements.back.classList.remove("dark-mode_elements")
 
     elements.text.forEach((element:any)=>{
         element.classList.remove("dark-mode_text")    
@@ -112,6 +120,7 @@ if(localStorage.getItem("dark_mode") == "true"){
     elements.header.classList.add("dark-mode")
     elements.search.classList.add("dark-mode_input")
     elements.selected.classList.add("dark-mode_elements")
+    elements.back.classList.add("dark-mode_elements")
 
     elements.text.forEach((element:any)=>{
         element.classList.add("dark-mode_text")    
@@ -151,13 +160,13 @@ getInfo("https://restcountries.com/v3.1/all")
                 let grid_item = document.createElement("div")
                 grid_item.setAttribute("grid-item" , "")
                 grid_item.classList.add("grid_item")
+                
                 enum info {
                     name = ele.name.common,
                     flag = ele.flags.png,
                     population = ele.population,
                     region = ele.region,
                     capital = ele.capital,
-                    
                 }
 
                 grid_item.innerHTML =`
@@ -179,8 +188,8 @@ getInfo("https://restcountries.com/v3.1/all")
                 elements.grid.appendChild(grid_item);
             } 
         });
-        return result;
-    }).then((result:any) => {
+        
+    
         let option = document.querySelectorAll(".select__menu_option")
         
         
@@ -192,119 +201,157 @@ getInfo("https://restcountries.com/v3.1/all")
 
                 const grid_item = document.querySelectorAll("[grid-item]")
                 
-                
-                
                 grid_item.forEach((element:any)=>{
 
-                    const region = element.childNodes[7].childNodes[3].textContent
+                    const region = element.childNodes[7].childNodes[3].textContent;
                     
-                    
-                    console.log(region.includes(value));
-                    
-                    if(!region.includes(value)){
-                        
-                        
-                        element.classList.add("hide")
-                        // let items = document.createElement("div")
-                        // items.setAttribute("grid-item", "")
-                        // items.classList.add("grid_item")
-                        // items.innerHTML = `
-                        //     <img class="grid_item_flags " src="${info.flag}" alt="${info.flag}">
-                        //     <h3 class="grid_item_title grid_item_text" grid-text>${info.name}</h3>
-                        //     <div class="grid_item_div">
-                        //         <h4 class="grid_item_text" grid-text>Population:</h4>
-                        //         <p class="grid_item_text" grid-text> ${info.population}</p>
-                        //     </div>
-                        //     <div class="grid_item_div">
-                        //         <h4 class="grid_item_text" grid-text>Region:</h4>
-                        //         <p class="grid_item_text" grid-text > ${info.region}</p>
-                        //     </div>
-                        //     <div class="grid_item_div">
-                        //         <h4 class="grid_item_text" grid-text>Capital:</h4>
-                        //         <p class="grid_item_text" grid-text> ${info.capital}</p>
-                        //     </div>
-                        // `;
-                        // elements.grid.appendChild(items)
-                    
-                    }else{
-                        element.classList.remove("hide")
+                    if(!element.classList.contains("hide")){
+                        if(!region.includes(value)){
+                            element.classList.add("hide-region")
+                        }else{
+                            element.classList.remove("hide-region")
+                        }
                     }
 
                 })
+
             })
         })
-    }) 
-    .then(()=>{ // the Input thing
 
+    
+        // darkmode
         elements.search.addEventListener("input",(e:any)=>{
-            // ================= FIRST METHODE =====================
-            // grid.innerHTML =""
-            // result.forEach((element:any)=>{
-            //     const target = e.target as HTMLInputElement;
-            //     const value = target.value;
-            //     console.log(value)
-                
-            //     if(element.name.common.includes(value) || element.region.includes(value)){
-            //         // console.log(element.name.common)
-            //         // let items = document.createElement("div")
-            //         //     items.classList.add("grid_item")
-                     
-            //             // enum info {
-            //             //     name = element.name.common,
-            //             //     flag = element.flags.png,
-            //             //     population = element.population,
-            //             //     region = element.region,
-            //             //     capital = element.capital
-            //             // }
-
-            //             // items.innerHTML = `
-            //             //     <img src="${info.flag}" alt="${info.flag}">
-            //             //     <h3 class="grid_item_title">${info.name}</h3>
-            //             //     <div class="grid_item_text">
-            //             //         <h5>Population:</h5><p> ${info.population}</p>
-            //             //     </div class="grid_item_text">
-            //             //     <div class="grid_item_text">
-            //             //         <h5>Region:</h5><p> ${info.region}</p>
-            //             //     </div>
-            //             //     <div class="grid_item_text">
-            //             //         <h5>Capital:</h5><p> ${info.capital}</p>
-            //             //     </div>
-            //             // `;
-            //             // grid.appendChild(items)
-            //     }
-            // })
+           
             //  ====================== BETTER METHODE ======================
-            let grid_item = document.querySelectorAll("[grid-item]")
+            const grid_item = document.querySelectorAll("[grid-item]")
+          
             
             grid_item.forEach(ele =>{
                 const target = e.target as HTMLInputElement;
                 const value = target.value.toUpperCase()
                 const nome = ele.childNodes[3].textContent.toUpperCase()
-
-                if(!nome.includes(value)){
-                    ele.classList.add("hide")
-                }else{
-                    ele.classList.remove("hide")
+                
+                if(!ele.classList.contains("hide-region")){
+                    if(!nome.includes(value)){
+                        ele.classList.add("hide")
+                    }else{
+                        ele.classList.remove("hide")
+                    }
                 }
+                
             })
         })            
-    })
-    .then(()=>{
+     
+       
+     
+        const grid_item = document.querySelectorAll("[grid-item]")
+        
+        
+        // Country   
+
+
+
+        grid_item.forEach(element =>{
+            element.addEventListener("click" ,()=> {
+                // hiding grid items + showing country
+                elements.all_items.classList.add("hide")
+                elements.country.classList.remove("hide")
+
+                    // looping thr
+                   
+                    
+                result.forEach((ele:any)=>{
+                    if(element.childNodes[3].textContent == ele.name.common){
+                
+                        
+                        
+                        
+                        const detail = document.createElement("div")
+                        detail.classList.add("detail")
+
+                        const info:any  = {
+                            name : ele.name.common,
+                            native : ele.name.official,
+                            flag : ele.flags.png,
+                            population : ele.population,
+                            region : ele.region,
+                            capital : ele.capital,
+                            sub_region : ele.subregion,
+                            borders : ele.borders,
+                            lang : Object.values(ele.languages),
+                            tld : ele.tld,
+                            
+                        }
+                        
+                        
+                        
+
+                        
+                        // for currencys
+                        let cur = ele.currencies;
+                        let curr
+                        for(const val in cur){
+                            curr = cur[val].name
+                        }
+                        console.log(ele.borders);
+                        
+                        detail.innerHTML = `
+
+                            
+                            <img class="detail_img" src="${info.flag}" alt="${info.name}">
+                            <div class="detail_info">
+                                <div class="detail_info_name">
+                                    <h1 grid-text>${info.name}</h1>
+                                    <p grid-text >Native Name: ${info.native}</p>
+                                    <p grid-text >Population: ${info.population}</p>
+                                    <p grid-text>Region: ${info.region} </p>
+                                    <p grid-text>Sub Region: ${info.sub_region}</p>
+                                    <p grid-text>Capital: ${info.capital}</p>
+                                </div>
+
+                                <div class="detail_info_more">
+                                    <p grid-text>Top Level Domain: ${info.tld}</p>
+                                    <p grid-text>Currencie: ${curr}</p>
+                                    <p grid-text>languages: ${info.lang.map((ele:any)=>{ return ele})}</p>
+                                </div>
+
+                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele:any)=>{return `<div class="detail_info_borders_border">${ele}</div>`}).join('')}</p></div>
+                            </div>
+                            `;
+                            
+                
+                        elements.back.after(detail)
+                        const text = document.querySelectorAll("[grid-text]");
+                        text.forEach(element =>{
+                            if(theme == "true"){
+                                element.classList.remove("dark-mode_text")
+                            }
+                            else{
+                                element.classList.add("dark-mode_text")
+                            }
+                        })
+                    }
+                })
+            })
+        })
+        
 
 
         let theme:string = localStorage.getItem("dark_mode");
-        const grid_item = document.querySelectorAll("[grid-item]")
-        const grid_text = document.querySelectorAll("[grid-text]")
-        console.log(grid_item , 1);
+     
+        const grid_text = document.querySelectorAll("[grid-text]");
         
         
-    
-        elements.btn_mode.addEventListener("click" , ()=>{
-            if(localStorage.getItem("dark_mode")== null){
 
+        elements.btn_mode.addEventListener("click" , ()=>{
+
+
+            if(localStorage.getItem("dark_mode")== null){
                 localStorage.setItem("dark_mode" , "false")
             }
-            
+
+            const grid_text = document.querySelectorAll("[grid-text]");
+
             grid_item.forEach(element =>{
                 if(theme == "false"){
                     element.classList.add("grid_item")
@@ -337,16 +384,17 @@ getInfo("https://restcountries.com/v3.1/all")
         // grid back-ground
         grid_item.forEach(element =>{
             if(theme == "true"){
-                element.classList.add("grid_item")
+               
                 element.classList.remove("dark-mode_elements") 
             }
             else{
                 element.classList.add("dark-mode_elements")
-                element.classList.remove("grid_item")
+                
             }
         })
 
         // for grid text
+
         grid_text.forEach(element =>{
             if(theme == "true"){
                 element.classList.remove("dark-mode_text")
@@ -355,9 +403,22 @@ getInfo("https://restcountries.com/v3.1/all")
                 element.classList.add("dark-mode_text")
             }
         })
-        
-        
-    })    
+
+
+
+    
+        elements.back.addEventListener("click" , ()=>{
+            const country_detail =  document.querySelector(".detail")
+            elements.all_items.classList.remove("hide")
+            country_detail.innerHTML = ""
+            elements.country.classList.add("hide")
+            
+            
+            
+            
+        })
+    
+    })
     .catch((rej: Error)=> console.log(rej))
 
 

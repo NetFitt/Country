@@ -163,6 +163,24 @@ body {
           animation: rotate-out 0.5s ease-out forwards;
 }
 
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    height: 10rem !important;
+  }
+  .container__search {
+    width: 90% !important;
+    height: 3.5rem !important;
+  }
+  .container__search .search {
+    height: 3.5rem !important;
+    width: 100% !important;
+  }
+  .container__origin {
+    height: 3.5rem !important;
+  }
+}
 header {
   height: 5rem;
   display: flex;
@@ -202,6 +220,7 @@ main .container {
 }
 main .container__search {
   position: relative;
+  width: 60%;
 }
 main .container__search_icon {
   position: absolute;
@@ -211,7 +230,7 @@ main .container__search_icon {
 }
 main .container__search .search {
   display: inline-block;
-  width: 30rem;
+  width: 100%;
   height: 100%;
   padding-left: 5rem;
   background-color: hsl(209deg, 23%, 22%);
@@ -277,6 +296,8 @@ main .grid {
 main .grid_item {
   background-color: hsl(209deg, 23%, 22%);
   border-radius: 5px;
+  padding-bottom: 30px;
+  cursor: pointer;
 }
 main .grid_item_title {
   margin-top: 15px;
@@ -297,6 +318,46 @@ main .grid_item_flags {
   height: 165px;
 }
 
-.hide {
+.hide, .hide-region {
   display: none;
+}
+.country_back {
+  background-color: hsl(209deg, 23%, 22%);
+  border-radius: 5px;
+  height: 2rem;
+  margin: 3rem 0;
+  justify-content: space-around;
+  display: flex;
+  width: 5rem;
+  align-items: center;
+  cursor: pointer;
+}
+.country .detail, .country .detail_info_borders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.country .detail_img {
+  width: 400px;
+}
+.country .detail_info {
+  display: grid;
+  gap: 20px;
+  width: 600px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: 1fr auto;
+}
+.country .detail_info_more {
+  margin-top: 43px;
+}
+.country .detail_info_borders {
+  align-items: center;
+}
+.country .detail_info_borders_border {
+  display: flex;
+  background-color: hsl(209deg, 23%, 22%);
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 5px;
 }/*# sourceMappingURL=Style.css.map */

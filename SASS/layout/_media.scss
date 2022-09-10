@@ -1,0 +1,23 @@
+
+@media only screen and (max-width: 600px) {
+    
+    .container {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        height: 10rem !important;
+    
+
+        &__search{
+            width: 90% !important;
+            height: 3.5rem !important;
+            .search{
+                height: 3.5rem !important;
+                width: 100% !important;
+            }
+        }     
+        &__origin{
+            height: 3.5rem !important;
+        }     
+    }
+    
+}

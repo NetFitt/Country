@@ -285,7 +285,7 @@ getInfo("https://restcountries.com/v3.1/all")
                         
 
                         if(info.borders == undefined){
-                            console.log("none");
+                            info.borders.push("there is none")
                             
                         }
                         

@@ -194,7 +194,7 @@ getInfo("https://restcountries.com/v3.1/all")
                         tld: ele.tld,
                     };
                     if (info.borders == undefined) {
-                        console.log("none");
+                        info.borders.push("there is none");
                     }
                     let cur = ele.currencies;
                     let curr;
@@ -221,8 +221,7 @@ getInfo("https://restcountries.com/v3.1/all")
                                     <p grid-text>languages: ${info.lang.map((ele) => { return ele; })}</p>
                                 </div>
                                 
-                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele) => { if (ele)
-                        return `<div class="detail_info_borders_border">${ele}</div>`; }).join('')}</p></div>
+                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele) => { return `<div class="detail_info_borders_border">${ele}</div>`; }).join('')}</p></div>
                             </div>
                             `;
                     elements.back.after(detail);

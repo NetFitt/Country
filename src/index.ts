@@ -320,7 +320,7 @@ getInfo("https://restcountries.com/v3.1/all")
                                     <p grid-text>languages: ${ info.lang.map((ele:any)=>{ return ele})}</p>
                                 </div>
                                 
-                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele:any)=>{if(ele) return `<div class="detail_info_borders_border">${ele}</div>`}).join('')}</p></div>
+                                <div class="detail_info_borders" ><p grid-text>Borders Countries:${info.borders.map((ele:any)=>{ return `<div class="detail_info_borders_border">${ele}</div>`}).join('')}</p></div>
                             </div>
                             `;
                             

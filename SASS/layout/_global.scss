@@ -9,3 +9,34 @@
     font-family: $TEXT-font;
     text-decoration: none;
 }
+
+body{
+    background-color: $dark-background;
+}
+
+.dark-mode {
+    
+    background-color: $light-elements !important; 
+
+    &_elements{
+        background-color: white !important;
+        box-shadow: 5px 5px 5px 5px rgb(0 0 0 / 5%) !important;
+        border-radius: 5px !important;
+    }
+    &_text{
+        color: black !important;
+    }
+    &_input{
+        background-color: white !important;
+        color: black !important;
+        box-shadow: 5px 5px 5px 5px rgb(0 0 0 / 5%) !important;
+        &::placeholder{
+            color: $light-Input !important;
+        }
+    }
+    &_glass{
+        color: $light-Input !important;
+    }
+    
+}
+

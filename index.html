@@ -5,58 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Country_rest</title>
-    <!-- style file -->
+    <!-- Fonts Awsome -->
+    <link rel="stylesheet" href="CSS/all.min.css">
+    <!-- Style File -->
     <link rel="stylesheet" href="CSS/style.css">
-    <!-- fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
-        
-
+    <!-- Javascript File -->
+    <script src="dist/index.js" defer></script>
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav class="nav">
             <div class="nav__links" > 
-                <i class="fa-regular fa-moon"></i>
                 <a href="#">
-                    <h1 class="title">Where in the World?</h1>
+                    <h1 class="title text" data-text>Where in the World?</h1>
                 </a>
             </div>
-            <div class="nav__links">
-                <a href="#">
-                    <h2 class="light">Dark Mode</h2>
-                </a>
-                <i class="fa-solid fa-alien"></i>
+            <div class="nav__links btn-mode">
+                    <h2 class="light text" data-text><i class="fa-solid fa-moon text" data-text></i> Dark Mode</h2>
             </div>
         </nav>
     </header>
     <main >
-        <div class="container">
-            <div class="container__search">
-                <input class="search" type="text" placeholder="Search For Country...">
+        <div class="all_countries">
+            <div class="container">
+                <div class="container__search">
+                    <span class="container__search_icon"><i class="fa-solid fa-magnifying-glass" glass></i></span>
+                    <input class="search" type="text" placeholder="Search For a Country...">
+                </div>
+                <div class="container__origin">
+                    <!-- the button FOR SELCET -->
+                    <div class="selected">
+                        <h4 class="text" data-text>Filter by Region <i class="fa-solid fa-caret-down icon text" data-text></i></h4>
+                    </div>
+                    <!-- THE SELECT the menu -->
+                    <div class="select" >               
+                        <ul class="select__menu" data-list>
+                            <li class="select__menu_option text" value="Africa" data-text>Africa</li>
+                            <li class="select__menu_option text" value="Americas" data-text>America</li>
+                            <li class="select__menu_option text" value="Europe" data-text>Europe</li>
+                            <li class="select__menu_option text" value="Asia" data-text>Asia</li>
+                            <li class="select__menu_option text" value="Oceania" data-text>Oceania</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="container__origin">
-                <!-- the button FOR SELCET -->
-                <div class="selected">
-                    <h4>Filter by Region</h4>
-                </div>
-                <!-- THE SELECT the menu -->
-                <div class="select " >               
-                    <ul class="select__menu">
-                        <li class="select__menu_option" value="africa">Africa</li>
-                        <li class="select__menu_option" value="america">America</li>
-                        <li class="select__menu_option" value="europe">Europe</li>
-                        <li class="select__menu_option" value="asia">Asia</li>
-                        <li class="select__menu_option" value="oceania">Oceania</li>
-                    </ul>
-                </div>
+            <!-- the main project -->
+            <div class="grid">
+
             </div>
         </div>
-        <!-- the main project -->
-        <div class="grid">
 
+        <div class="country hide">
+            <div class="country_back">
+                <i class="fa-solid fa-arrow-left-long" data-text></i><h3 data-text>Back</h3>
+            </div>
+        
+           
+        
         </div>
     </main>
-    <script src="Javascript/Script.js"></script>
 </body>
 </html>

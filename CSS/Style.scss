@@ -1,11 +1,13 @@
 //Importes
+
 @use  "../SASS/Variables/Variables" as *;
 @use "../SASS/layout/global" as *;
 @use "../SASS/layout/animations" as *;
+@use "../SASS/layout/media" as *;
 
-body{
-    background-color: $dark-background;
-}
+
+
+// normal
 
 header{
     height: 5rem;
@@ -29,6 +31,7 @@ header{
                 font-size: 1rem;
                 font-weight: 600;
             }
+            cursor: pointer;
         }
     }
 }
@@ -37,20 +40,28 @@ header{
 main{
     width: 90%;
     margin: 0 auto;
-
-    .container{
-        
-        margin: 2.5rem 0 2.5rem 0;
+    
+    .container{        
+        height: 3.5rem;
+        margin: 2.5rem 0 3.2rem 0;
         display: flex;
         justify-content: space-between;
 
         // [0] the text input
         &__search{
+            position: relative;
+            width: 60%;
+            &_icon{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 35px;
+            }
             .search{
                 display: inline-block;
-                width:24rem;
-                height: 3rem;
-                padding-left: 2.5rem;
+                width:100%;
+                height: 100%;
+                padding-left: 5rem;
                 background-color: $dark-elements;
                 border: none;
                 outline: none;
@@ -63,12 +74,13 @@ main{
         }
 
         // [1] on the select
+
         &__origin{
             //[1][0]this is THE button
             position: relative;
             .selected{
                 width: 11rem;
-                height: 3rem;
+                height: 100%;
                 background-color: $dark-elements;
                 display: flex;
                 justify-content: center;
@@ -86,7 +98,7 @@ main{
                 background-color: $dark-elements;
                 position: absolute;
                 border-radius: 5px;
-                transition: 0.5S;
+                transition: 0.5s;
                 opacity: 0;
                 //the unordered
                 &__menu{
@@ -103,36 +115,103 @@ main{
                 }            
             }
         }
-        
-
     }
     .grid{
         display: grid;
-        grid-template-columns:repeat(auto-fit,minmax(250px , 1fr));
-        gap: 50px;
+        grid-template-columns:repeat(auto-fill, minmax(250px , 1fr));
+        justify-content: center;
+        gap: 3.5rem;
         &_item{
             background-color: $dark-elements;
             border-radius: 5px;
+            padding-bottom: 30px;
+            cursor: pointer;
             &_title{
-                margin: 10px;
-            }
-            &_text{
                 margin: {
-                    left: 10px;
-                    bottom: 5px;
-
+                    top: 15px;
+                    left: 15px;
+                    bottom: 15px;
                 };
             }
-            h5 , p {
-                display: inline;
-                font-size: 1rem;
+            &_div{
+                margin: {
+                    left: 15px;
+                    bottom: 10px;
+                };
             }
-            img{
+            &_text {
+                display: inline-block;
+                
+            }
+            &_flags{
                 border-top-left-radius: 5px; 
                 border-top-right-radius: 5px;
                 width: 100%;
-                height: 150px;
+                height: 165px;
             }
         }
     }
 }
+// dark mode
+.hide{
+    display: none;
+    &-region{
+        @extend .hide;
+    }
+}
+
+
+// Country
+.country{
+    &_back{
+        background-color: $dark-elements;
+        border-radius: 5px;
+        height: 2rem;
+        margin: 3rem 0;
+        justify-content: space-around;
+        display: flex;
+        width: 5rem;
+        align-items: center;
+        cursor: pointer;
+        
+    }
+
+    .detail{
+        
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        &_img{
+            width: 400px;
+        }
+        &_info{
+            display: grid;
+            gap: 20px;
+            width: 600px;
+            justify-content: center;
+            grid-template-columns: repeat( auto-fill ,minmax(300px , 1fr)) ;
+            grid-template-rows: 1fr auto ;
+            &_more{
+                margin-top: 43px;
+            }
+            &_borders{
+                @extend .detail;
+                align-items: center;
+                
+                &_border{
+                    display: flex;
+                    background-color: $dark-elements;
+                    padding: 5px;
+                    border-radius: 5px;
+                    margin-left: 5px;
+
+                }
+            }
+           
+        }
+    }
+
+}
+
+
+
